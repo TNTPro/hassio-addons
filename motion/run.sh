@@ -8,8 +8,12 @@ CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
+	echo "Start config $i"
+	
+	echo "Copy camera template"
 	cp /etc/camera_template.conf /etc/camera$i.conf
 	
+	echo "Get config values"
 	VIDEODEVICE=$(jq --raw-output ".videodevices[$i].device" $CONFIG_PATH)
 	INPUT=$(jq --raw-output ".videodevices[$i].input" $CONFIG_PATH)
 	WIDTH=$(jq --raw-output ".videodevices[$i].width" $CONFIG_PATH)
@@ -24,7 +28,9 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	WEBCONTROLLOCAL=$(jq --raw-output ".videodevices[$i].webcontrol_local" $CONFIG_PATH)
 	WEBCONTROLHTML=$(jq --raw-output ".videodevices[$i].webcontrol_html" $CONFIG_PATH)
 	
-	if [ ! -f "$CONFIG" ]; then
+	
+	if [ ! -f "$CONFIG" ]; then		
+		echo "Fill config with values"
 		sed -i "s|%%VIDEODEVICE%%|$VIDEODEVICE|g" /etc/camera$i.conf
 		sed -i "s|%%INPUT%%|$INPUT|g" /etc/camera$i.conf
 		sed -i "s|%%WIDTH%%|$WIDTH|g" /etc/camera$i.conf
@@ -40,6 +46,8 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /etc/camera$i.conf
 		CONFIG=/etc/motion.conf
 	fi
+	
+	echo "End config $i"
 done
 
 
