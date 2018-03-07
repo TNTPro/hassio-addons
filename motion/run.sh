@@ -7,11 +7,15 @@ CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
 
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
+
+echo "Copy motion template"
+cp /etc/motion/motion_template.conf /etc/motion/motion.conf
+
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	echo "Start config $i"
 	
 	echo "Copy camera template"
-	cp /etc/camera_template.conf /etc/camera$i.conf
+	cp /etc/motion/camera_template.conf /etc/motion/camera$i.conf
 	
 	echo "Get config values"
 	VIDEODEVICE=$(jq --raw-output ".videodevices[$i].device" $CONFIG_PATH)
@@ -31,22 +35,22 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	if [ ! -f "$CONFIG" ]; then		
 		echo "Fill config with values"
-		sed -i "s|%%VIDEODEVICE%%|$VIDEODEVICE|g" /etc/camera$i.conf
-		sed -i "s|%%INPUT%%|$INPUT|g" /etc/camera$i.conf
-		sed -i "s|%%WIDTH%%|$WIDTH|g" /etc/camera$i.conf
-		sed -i "s|%%HEIGHT%%|$HEIGHT|g" /etc/camera$i.conf
-		sed -i "s|%%FRAMERATE%%|$FRAMERATE|g" /etc/camera$i.conf
-		sed -i "s|%%TEXTRIGHT%%|$TEXTRIGHT|g" /etc/camera$i.conf
-		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /etc/camera$i.conf
-		sed -i "s|%%SNAPSHOTINTERVAL%%|$SNAPSHOTINTERVAL|g" /etc/camera$i.conf
-		sed -i "s|%%SNAPSHOTNAME%%|$SNAPSHOTNAME|g" /etc/camera$i.conf
-		sed -i "s|%%PICTUREOUTPUT%%|$PICTUREOUTPUT|g" /etc/camera$i.conf
-		sed -i "s|%%PICTURENAME%%|$PICTURENAME|g" /etc/camera$i.conf
-		sed -i "s|%%WEBCONTROLLOCAL%%|$WEBCONTROLLOCAL|g" /etc/camera$i.conf
-		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /etc/camera$i.conf
-		CONFIG=/etc/motion.conf
+		sed -i "s|%%VIDEODEVICE%%|$VIDEODEVICE|g" /etc/motion/camera$i.conf
+		sed -i "s|%%INPUT%%|$INPUT|g" /etc/motion/camera$i.conf
+		sed -i "s|%%WIDTH%%|$WIDTH|g" /etc/motion/camera$i.conf
+		sed -i "s|%%HEIGHT%%|$HEIGHT|g" /etc/motion/camera$i.conf
+		sed -i "s|%%FRAMERATE%%|$FRAMERATE|g" /etc/motion/camera$i.conf
+		sed -i "s|%%TEXTRIGHT%%|$TEXTRIGHT|g" /etc/motion/camera$i.conf
+		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /etc/motion/camera$i.conf
+		sed -i "s|%%SNAPSHOTINTERVAL%%|$SNAPSHOTINTERVAL|g" /etc/motion/camera$i.conf
+		sed -i "s|%%SNAPSHOTNAME%%|$SNAPSHOTNAME|g" /etc/motion/camera$i.conf
+		sed -i "s|%%PICTUREOUTPUT%%|$PICTUREOUTPUT|g" /etc/motion/camera$i.conf
+		sed -i "s|%%PICTURENAME%%|$PICTURENAME|g" /etc/motion/camera$i.conf
+		sed -i "s|%%WEBCONTROLLOCAL%%|$WEBCONTROLLOCAL|g" /etc/motion/camera$i.conf
+		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /etc/motion/camera$i.conf
+		CONFIG=/etc/motion/motion.conf
 	fi
-	
+	echo "camera /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
 	echo "End config $i"
 done
 
