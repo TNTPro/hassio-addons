@@ -11,7 +11,7 @@ DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 echo "Copy motion template"
 cp /etc/motion/motion_template.conf /etc/motion/motion.conf
 
-touch /etc/motion/motion-cron
+touch /share/motion/motion-cron
 
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	echo "Start config $i"
@@ -59,16 +59,17 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	fi
 	echo "thread /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
 	
-	echo $(</etc/motion/crontab)
-	echo /etc/motion/crontab >> /etc/motion/motion-cron #/etc/cron.d/delete_old_files_cron	
-	sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /etc/motion/motion-cron
+	echo $(</share/motion/crontab)
 	
-	echo $(/etc/motion/motion-cron)
+	echo /share/motion/crontab >> /share/motion/motion-cron
+	sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
+	
+	echo $(</share/motion/motion-cron)
 	
 	echo "End config $i"
 done
 
-cp /etc/motion/motion-cron /etc/cron.d/motion-cron
+cp /share/motion/motion-cron /etc/cron.d/motion-cron
 echo "Cron execution permission"
 # Give execution rights on the cron job
 chmod 0644 /etc/cron.d/motion-cron
