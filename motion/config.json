@@ -14,34 +14,42 @@
   "devices": ["/dev/video0:/dev/video0:rwm"],
   "options": {
 	"config": "",
-  	"videodevice": "/dev/video0",
-  	"input": 0,
-  	"width": 640,
-  	"height": 480,
-  	"framerate": 2,
-  	"text_right": "%Y-%m-%d %T-%q",
-  	"target_dir": "/share/motion",
-  	"snapshot_interval": 30,
-  	"snapshot_name": "%v-%Y%m%d%H%M%S-snapshot",
-  	"picture_output": "on",
-  	"picture_name": "%v-%Y%m%d%H%M%S-%q",
-  	"webcontrol_local": "on",
-  	"webcontrol_html": "on"
+  	"videodevices": [
+		{
+			"device":"/dev/video0"
+			"input": -1,
+			"width": 640,
+			"height": 480,
+  			"framerate": 2,
+  			"text_right": "%Y-%m-%d %T-%q",
+  			"target_dir": "/share/motion",
+  			"snapshot_interval": 30,
+  			"snapshot_name": "%v-%Y%m%d%H%M%S-snapshot",
+  			"picture_output": "on",
+  			"picture_name": "%v-%Y%m%d%H%M%S-%q",
+  			"webcontrol_local": "on",
+  			"webcontrol_html": "on"
+		}
+	]
   },
   "schema": {
 	"config": "str",
-  	"videodevice": "str",
-  	"input": "int",
-  	"width": "int",
-  	"height": "int",
-  	"framerate": "int",
-  	"text_right": "str",
-  	"target_dir": "str",
-  	"snapshot_interval": "int",
-  	"snapshot_name": "str",
-  	"picture_output": "str",
-  	"picture_name": "str",
-  	"webcontrol_local": "str",
-  	"webcontrol_html": "str"
+  	"videodevices": [
+		{
+			"device":"str",
+			"input": "int",
+			"width": "int",
+			"height": "int",
+			"framerate": "int",
+			"text_right": "str",
+			"target_dir": "str",
+			"snapshot_interval": "int",
+			"snapshot_name": "str",
+			"picture_output": "str",
+			"picture_name": "str",
+			"webcontrol_local": "str",
+			"webcontrol_html": "str"
+		}
+	]
   }
 }
