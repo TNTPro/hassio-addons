@@ -50,7 +50,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /etc/motion/camera$i.conf
 		CONFIG=/etc/motion/motion.conf
 	fi
-	echo "camera /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
+	echo "thread /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
 	echo "End config $i"
 done
 
