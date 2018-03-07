@@ -55,8 +55,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		sed -i "s|%%PICTUREOUTPUT%%|$PICTUREOUTPUT|g" /share/motion/camera$i.conf
 		sed -i "s|%%PICTURENAME%%|$PICTURENAME|g" /share/motion/camera$i.conf
 		sed -i "s|%%WEBCONTROLLOCAL%%|$WEBCONTROLLOCAL|g" /share/motion/camera$i.conf
-		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /share/motion/camera$i.conf
-		CONFIG=/etc/motion/motion.conf
+		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /share/motion/camera$i.conf		
 	
 		echo "thread /share/motion/camera$i.conf" >> /share/motion/motion.conf
 		#cp /etc/motion/camera$i.conf /share/motion/camera$i.conf
@@ -70,6 +69,9 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	echo "End config $i"
 done
+if [ ! -f "$CONFIG" ]; then
+	CONFIG=/etc/motion/motion.conf
+fi
 
 cp /share/motion/motion.conf $CONFIG 
 
