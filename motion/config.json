@@ -14,6 +14,7 @@
   "devices": ["/dev/video0:/dev/video0:rwm"],
   "options": {
 	"config": "",
+	"updatecron": "true",
   	"videodevices": [
 		{
 			"device":"/dev/video0",
@@ -34,6 +35,7 @@
   },
   "schema": {
 	"config": "str",
+	"updatecron": "bool",
   	"videodevices": [
 		{
 			"device":"str",
