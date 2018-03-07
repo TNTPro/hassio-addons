@@ -8,9 +8,10 @@ UPDATECRON=$(jq --raw-output ".updatecron" $CONFIG_PATH)
 
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
-
-echo "Copy motion template"
-cp /etc/motion/motion_template.conf /etc/motion/motion.conf
+if [ ! -f "$CONFIG" ]; then	
+	echo "Copy motion template"
+	cp /etc/motion/motion_template.conf /share/motion/motion.conf
+fi
 
 touch /share/motion/motion-cron
 
@@ -19,7 +20,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	if [ ! -f "$CONFIG" ]; then	
 		echo "Copy camera template"
-		cp /etc/motion/camera_template.conf /etc/motion/camera$i.conf
+		cp /etc/motion/camera_template.conf /share/motion/camera$i.conf
 
 		echo "Get config values"
 		VIDEODEVICE=$(jq --raw-output ".videodevices[$i].device" $CONFIG_PATH)
@@ -42,22 +43,23 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		WEBCONTROLHTML=$(jq --raw-output ".videodevices[$i].webcontrol_html" $CONFIG_PATH)	
 		
 		echo "Fill config with values"
-		sed -i "s|%%VIDEODEVICE%%|$VIDEODEVICE|g" /etc/motion/camera$i.conf
-		sed -i "s|%%INPUT%%|$INPUT|g" /etc/motion/camera$i.conf
-		sed -i "s|%%WIDTH%%|$WIDTH|g" /etc/motion/camera$i.conf
-		sed -i "s|%%HEIGHT%%|$HEIGHT|g" /etc/motion/camera$i.conf
-		sed -i "s|%%FRAMERATE%%|$FRAMERATE|g" /etc/motion/camera$i.conf
-		sed -i "s|%%TEXTRIGHT%%|$TEXTRIGHT|g" /etc/motion/camera$i.conf
-		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /etc/motion/camera$i.conf
-		sed -i "s|%%SNAPSHOTINTERVAL%%|$SNAPSHOTINTERVAL|g" /etc/motion/camera$i.conf
-		sed -i "s|%%SNAPSHOTNAME%%|$SNAPSHOTNAME|g" /etc/motion/camera$i.conf
-		sed -i "s|%%PICTUREOUTPUT%%|$PICTUREOUTPUT|g" /etc/motion/camera$i.conf
-		sed -i "s|%%PICTURENAME%%|$PICTURENAME|g" /etc/motion/camera$i.conf
-		sed -i "s|%%WEBCONTROLLOCAL%%|$WEBCONTROLLOCAL|g" /etc/motion/camera$i.conf
-		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /etc/motion/camera$i.conf
+		sed -i "s|%%VIDEODEVICE%%|$VIDEODEVICE|g" /share/motion/camera$i.conf
+		sed -i "s|%%INPUT%%|$INPUT|g" /share/motion/camera$i.conf
+		sed -i "s|%%WIDTH%%|$WIDTH|g" /share/motion/camera$i.conf
+		sed -i "s|%%HEIGHT%%|$HEIGHT|g" /share/motion/camera$i.conf
+		sed -i "s|%%FRAMERATE%%|$FRAMERATE|g" /share/motion/camera$i.conf
+		sed -i "s|%%TEXTRIGHT%%|$TEXTRIGHT|g" /share/motion/camera$i.conf
+		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/camera$i.conf
+		sed -i "s|%%SNAPSHOTINTERVAL%%|$SNAPSHOTINTERVAL|g" /share/motion/camera$i.conf
+		sed -i "s|%%SNAPSHOTNAME%%|$SNAPSHOTNAME|g" /share/motion/camera$i.conf
+		sed -i "s|%%PICTUREOUTPUT%%|$PICTUREOUTPUT|g" /share/motion/camera$i.conf
+		sed -i "s|%%PICTURENAME%%|$PICTURENAME|g" /share/motion/camera$i.conf
+		sed -i "s|%%WEBCONTROLLOCAL%%|$WEBCONTROLLOCAL|g" /share/motion/camera$i.conf
+		sed -i "s|%%WEBCONTROLHTML%%|$WEBCONTROLHTML|g" /share/motion/camera$i.conf
 		CONFIG=/etc/motion/motion.conf
 	
-		echo "thread /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
+		echo "thread /share/motion/camera$i.conf" >> /share/motion/motion.conf
+		#cp /etc/motion/camera$i.conf /share/motion/camera$i.conf
 	
 	fi
 	
@@ -66,13 +68,10 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
 	fi	
 	
-	
-	cp /etc/motion/camera$i.conf /share/motion/camera$i.conf
-	
 	echo "End config $i"
 done
 
-cp $CONFIG /share/motion/motion.conf
+cp /share/motion/motion.conf $CONFIG 
 
 cp /share/motion/motion-cron /etc/cron.d/motion-cron
 echo "Cron execution permission"
