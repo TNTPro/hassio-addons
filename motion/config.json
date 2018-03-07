@@ -22,7 +22,7 @@
 			"height": 480,
   			"framerate": 2,
   			"text_right": "%Y-%m-%d %T-%q",
-  			"target_dir": "/share/motion",
+  			"target_dir": "/share/motion/camera0",
   			"snapshot_interval": 30,
   			"snapshot_name": "%v-%Y%m%d%H%M%S-snapshot",
   			"picture_output": "on",
