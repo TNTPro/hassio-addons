@@ -16,7 +16,7 @@
 	"config": "",
   	"videodevices": [
 		{
-			"device":"/dev/video0"
+			"device":"/dev/video0",
 			"input": -1,
 			"width": 640,
 			"height": 480,
