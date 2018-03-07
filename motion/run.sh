@@ -11,6 +11,8 @@ DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 echo "Copy motion template"
 cp /etc/motion/motion_template.conf /etc/motion/motion.conf
 
+touch etc/cron.d/delete_old_files_cron
+
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	echo "Start config $i"
 	
@@ -56,10 +58,23 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		CONFIG=/etc/motion/motion.conf
 	fi
 	echo "thread /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
+	
+	echo /crontab >> /etc/cron.d/delete_old_files_cron
+	sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /etc/cron.d/delete_old_files_cron
+	
+	echo $(</etc/cron.d/delete_old_files_cron)
+	
 	echo "End config $i"
 done
 
-
+echo "Cron execution permission"
+# Give execution rights on the cron job
+chmod 0644 /etc/cron.d/delete_old_files_cron
+# Create the log file to be able to run tail
+touch /var/log/cron.log
+echo "Run cron"
+# Run the command on container startup
+cron && tail -f /var/log/cron.log
 
 
 echo "[Info] Show connected usb devices"
