@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 
 # Copy data
 COPY run.sh /
-COPY motion.conf /etc/
-COPY camera_template.conf /etc/
+COPY motion.conf /etc/motion/motion_template.conf
+COPY camera_template.conf /etc/motion/
 
 RUN chmod a+x /run.sh
 
