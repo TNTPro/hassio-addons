@@ -4,6 +4,7 @@ set -e
 CONFIG_PATH=/data/options.json
 
 CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
+UPDATECRON=$(jq --raw-output ".updatecron" $CONFIG_PATH)
 
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
@@ -59,12 +60,10 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	fi
 	echo "thread /etc/motion/camera$i.conf" >> /etc/motion/motion.conf
 	
-	echo $(</share/motion/crontab)
-	
-	echo /share/motion/crontab >> /share/motion/motion-cron
-	sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
-	
-	echo $(</share/motion/motion-cron)
+	if [ "$UPDATECRON" == "true" ]; then
+		echo /etc/motion/crontab >> /share/motion/motion-cron
+		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
+	fi	
 	
 	echo "End config $i"
 done
