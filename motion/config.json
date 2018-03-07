@@ -11,7 +11,7 @@
   "map": [
     "share:rw"
   ],
-  "devices": ["/dev/video*:/dev/video*:rwm"],
+  "devices": ["/dev/video0:/dev/video0:rwm","/dev/video1:/dev/video1:rwm"],
   "options": {
 	"config": "",
 	"updatecron": "true",
