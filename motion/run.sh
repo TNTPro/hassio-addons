@@ -19,12 +19,17 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	echo "Get config values"
 	VIDEODEVICE=$(jq --raw-output ".videodevices[$i].device" $CONFIG_PATH)
+	echo $VIDEODEVICE
 	INPUT=$(jq --raw-output ".videodevices[$i].input" $CONFIG_PATH)
+	echo $INPUT
 	WIDTH=$(jq --raw-output ".videodevices[$i].width" $CONFIG_PATH)
+	echo $WIDTH
 	HEIGHT=$(jq --raw-output ".videodevices[$i].height" $CONFIG_PATH)
+	echo $HEIGHT
 	FRAMERATE=$(jq --raw-output ".videodevices[$i].framerate" $CONFIG_PATH)
 	TEXTRIGHT=$(jq --raw-output ".videodevices[$i].text_right" $CONFIG_PATH)
 	TARGETDIR=$(jq --raw-output ".videodevices[$i].target_dir" $CONFIG_PATH)
+	echo $TARGETDIR
 	SNAPSHOTINTERVAL=$(jq --raw-output ".videodevices[$i].snapshot_interval" $CONFIG_PATH) 
 	SNAPSHOTNAME=$(jq --raw-output ".videodevices[$i].snapshot_name" $CONFIG_PATH) 
 	PICTUREOUTPUT=$(jq --raw-output ".videodevices[$i].picture_output" $CONFIG_PATH)
