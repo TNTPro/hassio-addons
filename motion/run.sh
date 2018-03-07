@@ -22,17 +22,17 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	echo "Get config values"
 	VIDEODEVICE=$(jq --raw-output ".videodevices[$i].device" $CONFIG_PATH)
-	echo $VIDEODEVICE
+	#echo $VIDEODEVICE
 	INPUT=$(jq --raw-output ".videodevices[$i].input" $CONFIG_PATH)
-	echo $INPUT
+	#echo $INPUT
 	WIDTH=$(jq --raw-output ".videodevices[$i].width" $CONFIG_PATH)
-	echo $WIDTH
+	#echo $WIDTH
 	HEIGHT=$(jq --raw-output ".videodevices[$i].height" $CONFIG_PATH)
-	echo $HEIGHT
+	#echo $HEIGHT
 	FRAMERATE=$(jq --raw-output ".videodevices[$i].framerate" $CONFIG_PATH)
 	TEXTRIGHT=$(jq --raw-output ".videodevices[$i].text_right" $CONFIG_PATH)
 	TARGETDIR=$(jq --raw-output ".videodevices[$i].target_dir" $CONFIG_PATH)
-	echo $TARGETDIR
+	#echo $TARGETDIR
 	SNAPSHOTINTERVAL=$(jq --raw-output ".videodevices[$i].snapshot_interval" $CONFIG_PATH) 
 	SNAPSHOTNAME=$(jq --raw-output ".videodevices[$i].snapshot_name" $CONFIG_PATH) 
 	PICTUREOUTPUT=$(jq --raw-output ".videodevices[$i].picture_output" $CONFIG_PATH)
@@ -73,10 +73,10 @@ echo "Cron execution permission"
 # Give execution rights on the cron job
 chmod 0644 /etc/cron.d/motion-cron
 # Create the log file to be able to run tail
-touch /share/motion/log/cron.log
+touch /share/motion/cron.log
 echo "Run cron"
 # Run the command on container startup
-cron && tail -f /share/motion/log/cron.log
+cron && tail -f /share/motion/cron.log
 
 
 echo "[Info] Show connected usb devices"
