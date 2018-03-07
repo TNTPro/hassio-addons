@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 COPY run.sh /
 COPY motion.conf /etc/motion/motion_template.conf
 COPY camera_template.conf /etc/motion/
-COPY crontab /crontab
+COPY crontab /etc/motion/crontab
 
 RUN chmod a+x /run.sh
 
