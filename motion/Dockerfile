@@ -12,9 +12,9 @@ RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie m
 
 RUN apt-get update &&  \
     apt-get install -y \
-    uv4l  \
-    uv4l-raspicam \
-    uv4l-raspicam-extras
+    uv4l  #\
+#    uv4l-raspicam \
+#    uv4l-raspicam-extras
 
 # Copy data
 COPY run.sh /
