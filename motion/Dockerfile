@@ -7,15 +7,14 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     cron \
     wget
     
-RUN wget http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc
-RUN apt-key add lrkey.asc
+RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
+RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list.d/uv4l-wheezy.list
 
-#COPY /etc/apt/sources.list /share/motion/sources1.list
-RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list.d/jessie.list
-#RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list
-#COPY /etc/apt/sources.list.d/uv4l.list /share/motion/sources2.list
-
-RUN apt-get update && apt-get install -q -y --no-install-recommends uv4l uv4l-raspicam uv4l-raspicam-extras
+RUN apt-get update &&  \
+    apt-get install -y \
+    uv4l  \
+    uv4l-raspicam \
+    uv4l-raspicam-extras
 
 # Copy data
 COPY run.sh /
