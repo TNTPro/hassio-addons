@@ -5,12 +5,11 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
     cron \
-    curl \
-    sed 
+    curl 
     
 # Install the UV4L PPA
-RUN curl -s http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add - &&\
-  sed -i '1s;^;deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main\n;' /etc/apt/sources.list
+RUN curl -s http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add - 
+RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" /etc/apt/sources.list
 
 # Install dependencies as well as the proper version of uv4l-webrtc
 RUN apt-get update -q &&\
