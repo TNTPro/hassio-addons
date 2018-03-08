@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
     cron \
-    curl
+    curl \
+    sed 
     
 # Install the UV4L PPA
 RUN curl -s http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add - &&\
