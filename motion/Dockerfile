@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
     cron \
-    wget
+    curl
     
 RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
 RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list.d/uv4l-wheezy.list
