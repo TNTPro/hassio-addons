@@ -5,6 +5,7 @@ RUN apt-get update && apt-get -y -q install wget
 
 RUN wget http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc
 RUN apt-key add lrkey.asc
+RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
