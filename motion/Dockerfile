@@ -9,10 +9,9 @@ RUN apt-key add lrkey.asc
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
-    cron \
-    uv4l  \
-    uv4l-raspicam  \
-    uv4l-raspicam-extras
+    cron
+    
+RUN apt-get -y -q install uv4l uv4l-raspicam uv4l-raspicam-extras
 
 # Copy data
 COPY run.sh /
