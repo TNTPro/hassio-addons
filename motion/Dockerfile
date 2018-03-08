@@ -15,7 +15,7 @@ RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie m
 RUN echo "deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main" > /etc/apt/sources.list
 #COPY /etc/apt/sources.list.d/uv4l.list /share/motion/sources2.list
 
-RUN apt-get -y -q install  -q -y --no-install-recommends uv4l uv4l-raspicam uv4l-raspicam-extras
+RUN apt-get install -q -y --no-install-recommends uv4l uv4l-raspicam uv4l-raspicam-extras
 
 # Copy data
 COPY run.sh /
