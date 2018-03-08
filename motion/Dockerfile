@@ -2,12 +2,15 @@
 FROM debian:jessie
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
-    motion \
+    motion
     jq \
     cron
     
-RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
-RUN sudo aptitude update && sudo aptitude install uv4l uv4l-raspicam uv4l-raspicam-extras
+RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    uv4l  \
+    uv4l-raspicam  \
+    uv4l-raspicam-extras
 
 # Copy data
 COPY run.sh /
