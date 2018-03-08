@@ -25,8 +25,6 @@ RUN apt-get update -q &&\
     uv4l-uvc \
     uv4l-xmpp-bridge \
     uv4l-xscreen \
-    uv4l-webrtc$([ $(uname -m) = armv6l ] && echo -armv6) \
-    vlc \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
     
 #RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
