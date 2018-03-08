@@ -1,13 +1,15 @@
 
 FROM debian:jessie
 
+RUN apt-get update && apt-get -y -q install wget
+
+RUN wget http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc
+RUN apt-key add lrkey.asc
+
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion
     jq \
-    cron
-    
-RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
-RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    cron \
     uv4l  \
     uv4l-raspicam  \
     uv4l-raspicam-extras
