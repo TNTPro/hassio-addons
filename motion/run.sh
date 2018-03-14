@@ -83,7 +83,7 @@ chmod 0644 /etc/cron.d/motion-cron
 #touch /share/motion/cron.log
 echo "Run cron"
 # Run the command on container startup
-crontab #&& tail -f /share/motion/cron.log
+sudo cron #&& tail -f /share/motion/cron.log
 
 
 echo "[Info] Show connected usb devices"
@@ -91,4 +91,4 @@ ls -al /dev/video*
 
 
 # start server
-motion -c $CONFIG
+#motion -c $CONFIG
