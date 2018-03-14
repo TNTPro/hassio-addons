@@ -63,7 +63,8 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	fi
 	
 	if [ "$UPDATECRON" == "true" ]; then
-		echo /etc/motion/crontab >> /share/motion/motion-cron
+		#echo /etc/motion/crontab >> /share/motion/motion-cron
+		cat /etc/motion/crontab >> /share/motion/motion-cron
 		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
 	fi	
 	
@@ -83,7 +84,7 @@ chmod 0644 /etc/cron.d/motion-cron
 #touch /share/motion/cron.log
 echo "Run cron"
 # Run the command on container startup
-cron #&& tail -f /share/motion/cron.log
+cron /etc/cron.d/motion-cron #&& tail -f /share/motion/cron.log
 
 
 echo "[Info] Show connected usb devices"
