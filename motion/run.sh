@@ -80,11 +80,9 @@ cp /share/motion/motion-cron /etc/cron.d/motion-cron
 echo "Cron execution permission"
 # Give execution rights on the cron job
 chmod 0644 /etc/cron.d/motion-cron
-# Create the log file to be able to run tail
-touch /share/motion/cron.log
 echo "Run cron"
 # Run the command on container startup
-cron /etc/cron.d/motion-cron && tail -f /share/motion/cron.log
+cron /etc/cron.d/motion-cron
 
 
 echo "[Info] Show connected usb devices"
