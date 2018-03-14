@@ -4,6 +4,7 @@ FROM debian:jessie
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
+    cat \
     cron
 #    curl 
 
