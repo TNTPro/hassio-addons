@@ -21,7 +21,7 @@ COPY run.sh /
 COPY motion.conf /etc/motion/motion_template.conf
 COPY camera_template.conf /etc/motion/
 
-#COPY crontab /etc/motion/crontab
+COPY crontab /etc/motion/crontab
 
 # Add our crontab file
 ADD crontab /etc/motion/crontab
