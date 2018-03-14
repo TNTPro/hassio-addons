@@ -22,9 +22,6 @@ COPY motion.conf /etc/motion/motion_template.conf
 COPY camera_template.conf /etc/motion/
 
 COPY crontab /etc/motion/crontab
-
-# Add our crontab file
-ADD crontab /etc/motion/crontab
 # Use the crontab file
 RUN crontab /etc/motion/crontab
 # Start cron
