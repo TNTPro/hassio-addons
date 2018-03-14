@@ -4,7 +4,8 @@ FROM debian:jessie
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     motion \
     jq \
-    cron
+    cron \
+    tail
 #    curl 
 
 #RUN curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | apt-key add -
