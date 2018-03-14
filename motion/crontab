@@ -1,2 +1,2 @@
-* * * * * rm -rf %%TARGETDIR%%/*
+##* * * * * rm -rf %%TARGETDIR%%/*
 * * * * * rm -rf /share/motion/camera0
