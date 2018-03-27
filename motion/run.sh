@@ -64,7 +64,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		
 	echo 'find '$TARGETDIR'/ -type f ! -name "lastsnap.jpg" -exec rm -rf {} /\;'
 	#echo "rm -rf "$TARGETDIR"/*.jpg"
-	REMOVECMD='find '$TARGETDIR'/ -type f ! -name "lastsnap.jpg" -exec rm -rf {} /\;'
+	REMOVECMD='find '$TARGETDIR'/ -type f ! -name "lastsnap.jpg" -exec rm -rf {} /\; 1 // 2 \\ 3 /\ 4 \/'
 		
 	if [ "$i" -lt "$((DEVICE_COUNT-1))" ]; then
 		REMOVECMD+="\n" 
