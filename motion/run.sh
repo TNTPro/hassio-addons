@@ -11,6 +11,7 @@ DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 if [ ! -f "$CONFIG" ]; then	
 	echo "Copy motion template"
 	cp /etc/motion/motion_template.conf /share/motion/motion.conf
+	cp /delete_images.sh /share/motion/delete_images.sh
 fi
 
 touch /share/motion/motion-cron
@@ -64,8 +65,12 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	
 	if [ "$UPDATECRON" == "true" ]; then
 		#echo /etc/motion/crontab >> /share/motion/motion-cron
-		cat /etc/motion/crontab >> /share/motion/motion-cron
-		sed -i "s|%%TARGETDIR%%|$TARGETDIR|g" /share/motion/motion-cron
+		#cat /etc/motion/crontab >> /share/motion/motion-cron
+		
+		
+		REMOVECMD  = "%%PLACEHOLDER%% \n rm -rf "+$TARGETDIR+ "/*.jpg"
+		
+		sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh
 	fi	
 	
 	echo "End config $i"
@@ -76,14 +81,7 @@ fi
 
 cp /share/motion/motion.conf $CONFIG 
 
-cp /share/motion/motion-cron /etc/cron.d/motion-cron
-echo "Cron execution permission"
-# Give execution rights on the cron job
-chmod 0644 /etc/cron.d/motion-cron
-echo "Run cron"
-# Run the command on container startup
-cron /etc/cron.d/motion-cron
-
+cp /share/motion/delete_images.sh /delete_images.sh
 
 echo "[Info] Show connected usb devices"
 ls -al /dev/video*
