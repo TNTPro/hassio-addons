@@ -70,6 +70,8 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		REMOVECMD+="\n" 
 		REMOVECMD+=%%PLACEHOLDER%%			
 	fi
+	
+	mkdir -p $TARGETDIR
 		
 	sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh		
 	
