@@ -71,7 +71,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		echo "rm -rf "$TARGETDIR"/*.jpg"
 		REMOVECMD="rm -rf "$TARGETDIR"/*.jpg"
 		
-		if [ "$i" -lt "$DEVICE_COUNT -1" ]; then
+		if [ "$i" -lt "$((DEVICE_COUNT-1))" ]; then
 			REMOVECMD+="\n" 
 			REMOVECMD+=%%PLACEHOLDER%%			
 		fi
