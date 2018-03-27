@@ -68,7 +68,7 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		#cat /etc/motion/crontab >> /share/motion/motion-cron
 		
 		
-		REMOVECMD  = "%%PLACEHOLDER%% \n rm -rf "+$TARGETDIR+ "/*.jpg"
+		REMOVECMD  = "%%PLACEHOLDER%% \n rm -rf " $TARGETDIR  "/*.jpg"
 		
 		sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh
 	fi	
