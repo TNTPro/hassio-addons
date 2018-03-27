@@ -26,6 +26,10 @@ camera:
 
 Path to a predefined motion.conf settings file
 
+##### delete_images_interval
+
+Interval for deleting old image files in minutes
+
 ##### videodevices
 
 Config for all of your video devices with the following schema
