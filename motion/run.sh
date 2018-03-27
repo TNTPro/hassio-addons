@@ -91,8 +91,8 @@ cp /share/motion/delete_images.sh /delete_images.sh
 
 chmod a+x /share/motion/delete_images.sh
 
-#echo "[Info] Run delete_images"
-#/share/motion/delete_images.sh &
+echo "[Info] Run delete_images"
+/share/motion/delete_images.sh &
 
 echo "[Info] Show connected usb devices"
 ls -al /dev/video*
