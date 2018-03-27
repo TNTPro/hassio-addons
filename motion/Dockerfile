@@ -21,12 +21,10 @@ COPY run.sh /
 COPY motion.conf /etc/motion/motion_template.conf
 COPY camera_template.conf /etc/motion/
 
-COPY crontab /etc/motion/crontab
-# Use the crontab file
-RUN crontab /etc/motion/crontab
-# Start cron
-RUN cron
+COPY delete_images.sh /
 
+RUN chmod a+x /delete_images.sh
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
+CMD [ "/delete_images.sh" ]
