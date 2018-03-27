@@ -2,5 +2,5 @@
 while true
 do     
     %%PLACEHOLDER%%    
-    sleep 5m
+    sleep %%DELETE_IMAGES_INTERVAL%%m
 done
