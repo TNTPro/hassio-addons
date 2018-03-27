@@ -70,7 +70,8 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		
 		REMOVECMD="rm -rf " $TARGETDIR  "/*.jpg"
 		if [ "$i" -lt "$DEVICE_COUNT -1"]; then
-			REMOVECMD+="\n %%PLACEHOLDER%%			
+			REMOVECMD+="\n" 
+			REMOVECMD+=%%PLACEHOLDER%%			
 		fi
 		
 		sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh
@@ -88,7 +89,7 @@ cp /share/motion/delete_images.sh /delete_images.sh
 
 chmod a+x /share/motion/delete_images.sh
 
-echo "[Info] Run delete_images"
+#echo "[Info] Run delete_images"
 #/share/motion/delete_images.sh &
 
 echo "[Info] Show connected usb devices"
