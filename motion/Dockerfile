@@ -23,8 +23,6 @@ COPY camera_template.conf /etc/motion/
 
 COPY delete_images.sh /
 
-RUN chmod a+x /delete_images.sh
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
-CMD [ "/delete_images.sh" ]
