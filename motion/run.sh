@@ -99,4 +99,4 @@ ls -al /dev/video*
 
 
 # start server
-#motion -c $CONFIG
+motion -c $CONFIG
