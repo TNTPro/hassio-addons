@@ -4,13 +4,15 @@ set -e
 CONFIG_PATH=/data/options.json
 
 CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
-
+DELETE_IMAGES_INTERVAL=$(jq --raw-output ".delete_images_interval" $CONFIG_PATH)
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
 if [ ! -f "$CONFIG" ]; then	
 	echo "Copy motion template"
 	cp /etc/motion/motion_template.conf /share/motion/motion.conf
 	cp /delete_images.sh /share/motion/delete_images.sh
+	
+	sed -i "s|%%DELETE_IMAGES_INTERVAL%%|$DELETE_IMAGES_INTERVAL|g" /share/motion/delete_images.sh
 fi
 
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
