@@ -14,7 +14,7 @@
   "devices": ["/dev/video0:/dev/video0:rwm","/dev/video1:/dev/video1:rwm"],
   "options": {
 	"config": "",
-	"updatecron": "true",
+	"delete_images_interval": "5",
   	"videodevices": [
 		{
 			"device":"/dev/video0",
@@ -35,7 +35,7 @@
   },
   "schema": {
 	"config": "str",
-	"updatecron": "bool",
+	"delete_images_interval": "int",
   	"videodevices": [
 		{
 			"device":"str",
