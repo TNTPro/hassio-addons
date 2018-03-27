@@ -4,7 +4,6 @@ set -e
 CONFIG_PATH=/data/options.json
 
 CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
-UPDATECRON=$(jq --raw-output ".updatecron" $CONFIG_PATH)
 
 DEVICE_COUNT=$(jq --raw-output ".videodevices | length" $CONFIG_PATH)
 
@@ -13,8 +12,6 @@ if [ ! -f "$CONFIG" ]; then
 	cp /etc/motion/motion_template.conf /share/motion/motion.conf
 	cp /delete_images.sh /share/motion/delete_images.sh
 fi
-
-touch /share/motion/motion-cron
 
 for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 	echo "Start config $i"
