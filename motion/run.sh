@@ -61,23 +61,17 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		#cp /etc/motion/camera$i.conf /share/motion/camera$i.conf
 	
 	fi
-	
-	if [ "$UPDATECRON" == "true" ]; then
-		#echo /etc/motion/crontab >> /share/motion/motion-cron
-		#cat /etc/motion/crontab >> /share/motion/motion-cron
 		
-		#echo "$(rm -rf "$TARGETDIR"/*.jpg)"
-		echo "find "$TARGETDIR"/ -type f ! -name 'lastsnap.jpg' -exec rm -rf {} \;"
-		#echo "rm -rf "$TARGETDIR"/*.jpg"
-		REMOVECMD="find "$TARGETDIR"/ -type f ! -name 'lastsnap.jpg' -exec rm -rf {} \;"
+	echo "find "$TARGETDIR"/ -type f ! -name 'lastsnap.jpg' -exec rm -rf {} \;"
+	#echo "rm -rf "$TARGETDIR"/*.jpg"
+	REMOVECMD="find "$TARGETDIR"/ -type f ! -name 'lastsnap.jpg' -exec rm -rf {} \;"
 		
-		if [ "$i" -lt "$((DEVICE_COUNT-1))" ]; then
-			REMOVECMD+="\n" 
-			REMOVECMD+=%%PLACEHOLDER%%			
-		fi
+	if [ "$i" -lt "$((DEVICE_COUNT-1))" ]; then
+		REMOVECMD+="\n" 
+		REMOVECMD+=%%PLACEHOLDER%%			
+	fi
 		
-		sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh
-	fi	
+	sed -i "s|%%PLACEHOLDER%%|$REMOVECMD|g" /share/motion/delete_images.sh		
 	
 	echo "End config $i"
 done
