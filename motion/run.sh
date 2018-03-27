@@ -67,12 +67,11 @@ for (( i=0; i < "$DEVICE_COUNT"; i++ )); do
 		#echo /etc/motion/crontab >> /share/motion/motion-cron
 		#cat /etc/motion/crontab >> /share/motion/motion-cron
 		
-		echo "$(rm -rf "$TARGETDIR"/*.jpg)"
+		#echo "$(rm -rf "$TARGETDIR"/*.jpg)"
 		echo "rm -rf "$TARGETDIR"/*.jpg"
-		REMOVECMD="rm -rf " 
-		REMOVECMD+=$TARGETDIR  
-		REMOVECMD+="/*.jpg"
-		if [ "$i" -lt "$DEVICE_COUNT -1"]; then
+		REMOVECMD="rm -rf "$TARGETDIR"/*.jpg"
+		
+		if [ "$i" -lt "$DEVICE_COUNT -1" ]; then
 			REMOVECMD+="\n" 
 			REMOVECMD+=%%PLACEHOLDER%%			
 		fi
