@@ -2,7 +2,8 @@
 set -e
 
 echo "[Info] Show connected usb devices"
-ls -al /dev/video*
+dmesg | grep tty
+# ls -al /dev/video*
 
 CONFIG_PATH=/data/options.json
 
