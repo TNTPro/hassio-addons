@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "[Info] Show connected usb devices"
+ls -al /dev/video*
+
 CONFIG_PATH=/data/options.json
 
 CONFIG=$(jq --raw-output ".config" $CONFIG_PATH)
@@ -89,9 +92,6 @@ chmod a+x /share/motion/delete_images.sh
 
 echo "[Info] Run delete_images"
 /share/motion/delete_images.sh &
-
-echo "[Info] Show connected usb devices"
-ls -al /dev/video*
 
 
 # start server
