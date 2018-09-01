@@ -11,7 +11,7 @@
   "map": [
     "share:rw"
   ],
-  "devices": ["/dev/video0:/dev/video0:rwm","/dev/video1:/dev/video1:rwm"],
+  "devices": ["/dev/video0:/dev/video0:rwm","/dev/video1:/dev/video1:rwm","/dev/video2:/dev/video2:rwm"],
   "auto_uart": true,
   "options": {
 	"config": "",
