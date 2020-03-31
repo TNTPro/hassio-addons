@@ -3,6 +3,7 @@
   "version": "1.0",
   "slug": "tor",
   "description": "The onion router hidden service provider",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "system",
   "boot": "auto",
   "ports": {
