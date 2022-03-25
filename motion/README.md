@@ -142,3 +142,6 @@ Restrict control connections to localhost only
 *on*
 
 Output for http server, select off to choose raw text plain
+
+
+Icon credits [https://www.flaticon.com/free-icons/webcam" title="webcam icons">Webcam icons created by Freepik - Flaticon]
