@@ -7,6 +7,7 @@ Currently only working for the first webcam found at /dev/video0
 ### Changelog
 |Version|Changes|
 |-------|-------|
+|2.2.1  | Added Icon. Fix install. |
 |2.2    | Multi camera support |
 |2.1    | Added webcontrol configuration |
 |2.0    | Changed base image to debian:jessie. Size is now bigger, but finally stable!|
