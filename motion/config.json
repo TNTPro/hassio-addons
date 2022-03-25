@@ -12,8 +12,8 @@
   "map": [
     "share:rw"
   ],
-  "devices": ["/dev/video0:/dev/video0:rwm","/dev/video1:/dev/video1:rwm","/dev/video2:/dev/video2:rwm"],
-  "auto_uart": true,
+  "devices": ["/dev/video0","/dev/video1","/dev/video2"],
+  "uart": true,
   "options": {
 	"config": "",
 	"delete_images_interval": "5",
